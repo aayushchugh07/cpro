@@ -1,0 +1,69 @@
+*********Program 54.c ******************************
+//binary tree - insert and histogram count..
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+struct tnode {
+  char *word;
+  int count;
+  struct tnode *left;
+  struct tnode *right;
+};
+
+struct tnode* addtree(struct tnode *p, char *w);
+void treeprint(struct tnode *p);
+
+int main() {
+  struct tnode *root;
+  char tmpW[250];
+  char inF[250];
+  FILE *fp_in;
+
+  printf("enter the file name: ");
+  scanf("%s",inF);
+
+  fp_in = fopen(inF, "r");
+  if (fp_in == NULL) {
+    printf("file %s  cannot be opened..\n", inF);
+    exit(1);
+  }
+
+  root = NULL;
+
+  while(fscanf(fp_in, "%s",tmpW) != EOF) {
+      root = addtree(root, tmpW);
+  }
+  treeprint(root);
+  fclose(fp_in);
+}
+
+struct tnode* addtree(struct tnode *p, char *w) {
+  int cmp;
+  if (p == NULL) {
+    p = (struct tnode*) malloc(sizeof(struct tnode));
+    p->word = strdup(w); //strdup is a standard funtion in string.h: Allocates memory for word, copies and returns the pointer.
+    p->count = 1;
+    p->left = p->right = NULL;
+  }else { 
+    cmp = strcmp(w, p->word);
+    if (cmp == 0) {
+       p->count++;
+    } else if (cmp < 0) {
+       p->left = addtree(p->left, w);
+    } else {
+      p->right = addtree(p->right, w);
+    }
+  }
+ return p;
+}
+
+void treeprint(struct tnode *p) {
+  if (p != NULL) {
+    treeprint(p->left);
+    printf("%s %d\n", p->word, p->count);
+    treeprint(p->right);
+  }
+  return;
+}
+
+   

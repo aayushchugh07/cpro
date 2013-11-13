@@ -1,0 +1,38 @@
+*********Program 45.c ******************************
+#include<stdio.h>
+void reverse(char []);
+int main() {
+ char tempS[20];
+ scanf("%19s",tempS);
+ reverse(tempS);
+ putchar('\n');
+}
+void reverse(char s[]) {
+ if (s[0] == '\0'){
+  return;
+ }else {
+  reverse(&s[1]);
+  putchar(s[0]);
+ }
+}
+*********Program 46.c ******************************
+#include<stdio.h>
+void manipulate (char s[]);
+void try(const char s[]);
+int main() {
+ char s[] = "IIIT";
+ printf("%s\n", s);
+ try(s);
+ printf("%s\n", s);
+ manipulate(s);
+ printf("%s\n", s);
+}
+void manipulate(char s[]) {
+  s[0] = 'B';
+}
+
+void try(const char s[]) {
+  //s[0] = 'B';
+}
+
+

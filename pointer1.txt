@@ -1,0 +1,64 @@
+*********Program 47.c ******************************
+#include<stdio.h>
+int main() {
+ int x = 10;
+ printf("address of x is %p\n", &x);
+
+ long int p;
+ p = &x;
+ printf("address of x is %p\n", p);
+ //an int variable could store the address, but no direct mechanism of obtaining the value at the address.
+
+ int *q;
+ q = &x;
+ printf("address of x is %p and value at x is %d\n", q, *q);
+ //A pointer to store the address. * operator acts as indirection to obtain the value at the address.
+
+ printf("value is %d %d\n", *q, *(&x));
+
+ int a[] = {1, 2, 3};
+ char s[] = "raj";
+ 
+ int *pa = a;
+ char *ps = s;
+ printf("%d %d %s\n", pa[0], pa[1], ps);
+
+ // pointer arthimetic
+ printf("%d %d \n", *(pa + 0), *(pa + 1));
+ pa = pa + 2;
+ printf("%d %d\n", *pa, *(a + 2));
+
+ int * const cp = a;
+ //cp = cp + 2; //try this
+ //a = a + 2;  //try this... array name is a const pointer to the begin of an array
+ 
+}
+*********Program 48.c ******************************
+#include<stdio.h>
+void print_char(const char *s);
+void print_int(const int *a, int);
+int main() {
+ int a[] = {10, 20, 30, 40, 50};
+ char s[] = "raju-gentleman";
+ print_int(a, 5);
+ print_char(s);
+}
+void print_int(const int *a, int n){
+ int i;
+ for(i = 0; i < n; i++) {
+   printf("%d ", a[i]);
+ }
+ printf("\n");
+ return;
+}
+
+void print_char(const char *s){
+  int i = 0;
+  while (s[i] != '\0') {
+   printf("%c",s[i]);
+   i++;
+  }
+  printf("\n");
+  return;
+}
+
